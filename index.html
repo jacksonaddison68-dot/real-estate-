@@ -20,7 +20,7 @@
   <!-- GA4 snippet -->
   <script>
     (function(){
-      const id = (window.CONFIG && window.CONFIG.GA_MEASUREMENT_ID) ? window.CONFIG.GA_MEASUREMENT_ID : null;
+      const id = CONFIG.GA_MEASUREMENT_ID || null;
       if(!id) return;
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -36,7 +36,7 @@
   <!-- Meta Pixel -->
   <script>
     (function(){
-      const id = (window.CONFIG && window.CONFIG.META_PIXEL_ID) ? window.CONFIG.META_PIXEL_ID : null;
+      const id = CONFIG.META_PIXEL_ID || null;
       if(!id) return;
       !function(f,b,e,v,n,t,s){
         if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -51,6 +51,7 @@
     })();
   </script>
 
+  <!-- CSS -->
   <style>
     :root{
       --bg: #071127; --card:#07142a; --accent:#0b6bff; --accent2:#7c3aed;
@@ -93,198 +94,215 @@
   </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="logo">
-      <div class="mark">RE</div>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <div class="mark">RE</div>
+        <div>
+          <div class="brand">Appointment Engine</div>
+          <div style="font-size:13px;color:var(--muted)">AI lead → showing automation</div>
+        </div>
+      </div>
+      <nav>
+        <a class="link" href="#features">How it works</a>
+        <a class="link" href="#packages">Pricing</a>
+        <a class="btn" href="#book">Book Demo</a>
+      </nav>
+    </header>
+
+    <section class="hero">
       <div>
-        <div class="brand">Appointment Engine</div>
-        <div style="font-size:13px;color:var(--muted)">AI lead → showing automation</div>
-      </div>
-    </div>
-    <nav>
-      <a class="link" href="#features">How it works</a>
-      <a class="link" href="#packages">Pricing</a>
-      <a class="btn" href="#book">Book Demo</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <div>
-      <div class="card">
-        <div class="eyebrow">Turn existing leads into booked showings — without extra ad spend</div>
-        <h1>Instant texts. 30-day AI follow-up. Booked showings in minutes.</h1>
-        <p class="lead">Connect Zillow, Facebook & website leads to an AI workflow that qualifies buyers, books showings on your calendar, and keeps following up until they convert.</p>
-        <div class="kpis">
-          <div class="kpi">10–25 extra showings/mo</div>
-          <div class="kpi">1-hour onboarding</div>
-          <div class="kpi">No long contract</div>
-        </div>
-
-        <div id="features" style="margin-top:18px">
-          <div class="grid-3">
-            <div class="feature"><strong>Instant Response</strong><div class="muted">Reply under 1 second to increase contact rate.</div></div>
-            <div class="feature"><strong>AI Qualification</strong><div class="muted">Ask budget, timeline, pre-approval & filter junk.</div></div>
-            <div class="feature"><strong>Calendar Booking</strong><div class="muted">Showings booked directly on Google/Outlook calendar.</div></div>
-          </div>
-        </div>
-
-        <div class="packages" id="packages">
-          <div class="pkg">
-            <h3>Starter</h3>
-            <div class="price">$2,500 / mo</div>
-            <div class="muted">Follow-up, booking, CRM integration</div>
-          </div>
-          <div class="pkg">
-            <h3>Pro <span class="pill">Most popular</span></h3>
-            <div class="price">$5,000 / mo</div>
-            <div class="muted">Starter + lead scraping, auto-routing, lead scoring</div>
-          </div>
-          <div class="pkg">
-            <h3>Elite</h3>
-            <div class="price">$8,000 / mo</div>
-            <div class="muted">Pro + content automation, dashboards, priority support</div>
-          </div>
-        </div>
-
-        <div class="case card" style="margin-top:14px">
-          <strong>Sample result</strong>
-          <p class="muted" style="margin:8px 0 0 0">“Agent converted 3 of 7 booked showings in 14 days — ~$18k commission — contact rate x4.”</p>
-        </div>
-
-        <div class="card" style="margin-top:14px">
-          <strong>Guarantee</strong>
-          <div class="muted" style="margin-top:8px">If you don't get 10–20 booked appointments in 30 days, you don't pay.</div>
-        </div>
-      </div>
-    </div>
-
-    <aside class="form-col">
-      <div class="card" id="book">
-        <h3>Book a 2-min demo</h3>
-        <p class="muted">See the system handle a live lead and book a showing.</p>
-        <div id="success" class="success">Thanks — we received your request. Check your email for scheduling options.</div>
-
-        <form id="leadForm">
-          <div class="form-field">
-            <label for="name">Full name</label>
-            <input id="name" name="name" type="text" required placeholder="Jane Smith" />
-          </div>
-          <div class="form-field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required placeholder="you@agency.com" />
-          </div>
-          <div class="form-field">
-            <label for="phone">Phone</label>
-            <input id="phone" name="phone" type="text" required placeholder="+1 (555) 555-5555" />
-          </div>
-          <div class="form-field">
-            <label for="area">Primary market area (city / zip)</label>
-            <input id="area" name="area" type="text" placeholder="San Francisco, CA or 94103" />
-          </div>
-          <div class="form-field">
-            <label for="teamSize">Team size</label>
-            <select id="teamSize" name="teamSize">
-              <option value="solo">Solo agent</option>
-              <option value="small">Small team (2–10)</option>
-              <option value="large">Brokerage / large team</option>
-            </select>
-          </div>
-          <div class="form-field">
-            <label for="msg">Quick note (optional)</label>
-            <textarea id="msg" name="msg" rows="3" placeholder="Best times for a quick demo, main pain point..."></textarea>
+        <div class="card">
+          <div class="eyebrow">Turn existing leads into booked showings — without extra ad spend</div>
+          <h1>Instant texts. 30-day AI follow-up. Booked showings in minutes.</h1>
+          <p class="lead">Connect Zillow, Facebook & website leads to an AI workflow that qualifies buyers, books showings on your calendar, and keeps following up until they convert.</p>
+          <div class="kpis">
+            <div class="kpi">10–25 extra showings/mo</div>
+            <div class="kpi">1-hour onboarding</div>
+            <div class="kpi">No long contract</div>
           </div>
 
-          <div style="display:flex;gap:10px;margin-top:8px">
-            <button type="submit" class="primary">Request Demo — 2 minutes</button>
+          <div id="features" style="margin-top:18px">
+            <div class="grid-3">
+              <div class="feature"><strong>Instant Response</strong><div class="muted">Reply under 1 second to increase contact rate.</div></div>
+              <div class="feature"><strong>AI Qualification</strong><div class="muted">Ask budget, timeline, pre-approval & filter junk.</div></div>
+              <div class="feature"><strong>Calendar Booking</strong><div class="muted">Showings booked directly on Google/Outlook calendar.</div></div>
+            </div>
           </div>
 
-          <div class="muted" style="margin-top:10px">Or email: <a id="mailto" href="#" style="color:var(--accent)">jacksonaddison68@gmail.com</a></div>
-        </form>
+          <div class="packages" id="packages">
+            <div class="pkg">
+              <h3>Starter</h3>
+              <div class="price">$2,500 / mo</div>
+              <div class="muted">Follow-up, booking, CRM integration</div>
+            </div>
+            <div class="pkg">
+              <h3>Pro <span class="pill">Most popular</span></h3>
+              <div class="price">$5,000 / mo</div>
+              <div class="muted">Starter + lead scraping, auto-routing, lead scoring</div>
+            </div>
+            <div class="pkg">
+              <h3>Elite</h3>
+              <div class="price">$8,000 / mo</div>
+              <div class="muted">Pro + content automation, dashboards, priority support</div>
+            </div>
+          </div>
 
-        <div style="margin-top:12px;text-align:center">
-          <a class="link" href="#" id="callLink">(530) 305-0502</a>
+          <div class="case card" style="margin-top:14px">
+            <strong>Sample result</strong>
+            <p class="muted" style="margin:8px 0 0 0">“Agent converted 3 of 7 booked showings in 14 days — ~$18k commission — contact rate x4.”</p>
+          </div>
+
+          <div class="card" style="margin-top:14px">
+            <strong>Guarantee</strong>
+            <div class="muted" style="margin-top:8px">If you don't get 10–20 booked appointments in 30 days, you don't pay.</div>
+          </div>
         </div>
       </div>
 
-      <div style="margin-top:12px;color:var(--muted);font-size:13px;text-align:center">
-        <a class="btn" id="calendlyBtn" href="#" target="_blank">Schedule directly</a>
-      </div>
-    </aside>
-  </section>
+      <aside class="form-col">
+        <div class="card" id="book">
+          <h3>Book a 2-min demo</h3>
+          <p class="muted">See the system handle a live lead and book a showing.</p>
+          <div id="success" class="success">Thanks — we received your request. Check your email for scheduling options.</div>
 
-  <footer>
-    © <span id="year"></span> Appointment Engine — Built for agents who want more showings. <br/>
-    <small class="muted">Privacy • Terms</small>
-  </footer>
-</div>
+          <form id="leadForm">
+            <div class="form-field">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" required placeholder="Jane Smith" />
+            </div>
 
-<script>
-  // Update year, email, phone, and Calendly
-  document.getElementById('year').textContent = new Date().getFullYear();
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="you@agency.com" />
+            </div>
 
-  const emailLink = document.getElementById('mailto');
-  emailLink.href = 'mailto:' + (CONFIG.SALES_EMAIL || 'hello@your-email.com');
-  emailLink.textContent = CONFIG.SALES_EMAIL || 'hello@your-email.com';
+            <div class="form-field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="text" required placeholder="+1 (555) 555-5555" />
+            </div>
 
-  const callLink = document.getElementById('callLink');
-  callLink.href = 'tel:+15303050502';
-  callLink.textContent = '(530) 305-0502';
+            <div class="form-field">
+              <label for="area">Primary market area (city / zip)</label>
+              <input id="area" name="area" type="text" placeholder="San Francisco, CA or 94103" />
+            </div>
 
-  const calendlyBtn = document.getElementById('calendlyBtn');
-  calendlyBtn.href = CONFIG.CALENDLY_URL || '#';
+            <div class="form-field">
+              <label for="teamSize">Team size</label>
+              <select id="teamSize" name="teamSize">
+                <option value="solo">Solo agent</option>
+                <option value="small">Small team (2–10)</option>
+                <option value="large">Brokerage / large team</option>
+              </select>
+            </div>
 
-  const form = document.getElementById('leadForm');
-  const success = document.getElementById('success');
+            <div class="form-field">
+              <label for="msg">Quick note (optional)</label>
+              <textarea id="msg" name="msg" rows="3" placeholder="Best times for a quick demo, main pain point..."></textarea>
+            </div>
 
-  async function postToZapier(payload) {
-    const url = CONFIG.ZAPIER_WEBHOOK;
-    if(!url || url.includes('XXXXXXXX')) {
-      const subject = encodeURIComponent('Demo request — Appointment Engine');
-      const body = encodeURIComponent(`Name: ${payload.name}\nEmail: ${payload.email}\nPhone: ${payload.phone}\nArea: ${payload.area}\nTeam size: ${payload.teamSize}\n\nNote:\n${payload.msg}`);
-      window.location.href = `mailto:${CONFIG.SALES_EMAIL || 'hello@your-email.com'}?subject=${subject}&body=${body}`;
-      return;
-    }
-    try {
-      await fetch(url, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(payload)
+            <div style="display:flex;gap:10px;margin-top:8px">
+              <button type="submit" class="primary">Request Demo — 2 minutes</button>
+            </div>
+
+            <div class="muted" style="margin-top:10px">
+              Or email: <a id="mailto" href="#" style="color:var(--accent)">loading...</a>
+            </div>
+          </form>
+
+          <div style="margin-top:12px;text-align:center">
+            <a class="link" href="#" id="callLink">loading...</a>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;color:var(--muted);font-size:13px;text-align:center">
+          <a class="btn" id="calendlyBtn" href="#" target="_blank">Schedule directly</a>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Appointment Engine — Built for agents who want more showings. <br/>
+      <small class="muted">Privacy • Terms</small>
+    </footer>
+  </div>
+
+  <!-- ====== Fixed JS ====== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // UX elements
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      const emailEl = document.getElementById('mailto');
+      const phoneEl = document.getElementById('callLink');
+      const calendlyBtn = document.getElementById('calendlyBtn');
+
+      if(emailEl) {
+        emailEl.href = 'mailto:jacksonaddison68@gmail.com';
+        emailEl.textContent = 'jacksonaddison68@gmail.com';
+      }
+
+      if(phoneEl) {
+        phoneEl.href = 'tel:+15303050502';
+        phoneEl.textContent = '(530) 305-0502';
+      }
+
+      if(calendlyBtn) {
+        calendlyBtn.href = CONFIG.CALENDLY_URL || '#';
+      }
+
+      const form = document.getElementById('leadForm');
+      const success = document.getElementById('success');
+
+      async function postToZapier(payload) {
+        const url = CONFIG.ZAPIER_WEBHOOK;
+        if(!url || url.includes('XXXXXXXX')) {
+          const subject = encodeURIComponent('Demo request — Appointment Engine');
+          const body = encodeURIComponent(`Name: ${payload.name}\nEmail: ${payload.email}\nPhone: ${payload.phone}\nArea: ${payload.area}\nTeam size: ${payload.teamSize}\n\nNote:\n${payload.msg}`);
+          window.location.href = `mailto:${CONFIG.SALES_EMAIL || 'jacksonaddison68@gmail.com'}?subject=${subject}&body=${body}`;
+          return;
+        }
+        try {
+          await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+          });
+        } catch(err){
+          console.error('Zapier POST error', err);
+        }
+      }
+
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        const data = new FormData(form);
+        const payload = {
+          name: data.get('name'),
+          email: data.get('email'),
+          phone: data.get('phone'),
+          area: data.get('area'),
+          teamSize: data.get('teamSize'),
+          msg: data.get('msg'),
+          ts: new Date().toISOString(),
+          page: window.location.href,
+          utm_source: (new URLSearchParams(window.location.search)).get('utm_source') || ''
+        };
+
+        success.style.display = 'block';
+        form.reset();
+
+        await postToZapier(payload);
+
+        try {
+          if(window.gtag && CONFIG.GA_MEASUREMENT_ID) gtag('event','lead_submitted',payload);
+          if(window.fbq && CONFIG.META_PIXEL_ID) fbq('track','Lead', {value: 0.0, currency: 'USD'});
+        } catch(err){}
+
+        if(CONFIG.CALENDLY_URL && !CONFIG.CALENDLY_URL.includes('yourname')) {
+          window.open(CONFIG.CALENDLY_URL + (payload.email ? '?email=' + encodeURIComponent(payload.email) : ''), '_blank');
+        }
       });
-    } catch(err){
-      console.error('Zapier POST error', err);
-    }
-  }
-
-  form.addEventListener('submit', async function(e){
-    e.preventDefault();
-    const data = new FormData(form);
-    const payload = {
-      name: data.get('name'),
-      email: data.get('email'),
-      phone: data.get('phone'),
-      area: data.get('area'),
-      teamSize: data.get('teamSize'),
-      msg: data.get('msg'),
-      ts: new Date().toISOString(),
-      page: window.location.href,
-      utm_source: (new URLSearchParams(window.location.search)).get('utm_source') || ''
-    };
-
-    success.style.display = 'block';
-    form.reset();
-
-    await postToZapier(payload);
-
-    try {
-      if(window.gtag && CONFIG.GA_MEASUREMENT_ID) gtag('event','lead_submitted',payload);
-      if(window.fbq && CONFIG.META_PIXEL_ID) fbq('track','Lead', {value: 0.0, currency: 'USD'});
-    } catch(err){}
-
-    if(CONFIG.CALENDLY_URL && !CONFIG.CALENDLY_URL.includes('yourname')) {
-      window.open(CONFIG.CALENDLY_URL + (payload.email ? '?email=' + encodeURIComponent(payload.email) : ''), '_blank');
-    }
-  });
-</script>
+    });
+  </script>
 </body>
 </html>
