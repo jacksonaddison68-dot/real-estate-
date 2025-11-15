@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Real Estate Appointment Engine — Book More Showings</title>
   <meta name="description" content="Turn Zillow, Facebook & website leads into booked showings automatically. Instant AI response, 30-day follow-up, calendar booking. Book a 2-minute demo.">
-  <meta name="theme-color" content="#0b6bff">
 
   <!-- CONFIG -->
   <script>
@@ -24,59 +23,88 @@
       --accent2: #7c3aed;
       --text: #eef6ff;
       --muted: #9fb0d1;
-      --radius: 12px;
-      --max-width: 1000px;
+      --radius: 14px;
+      --max-width: 1100px;
     }
 
-    * { box-sizing: border-box; margin:0; padding:0; }
-    body { font-family: Arial, sans-serif; background: var(--bg); color: var(--text); line-height:1.5; padding:20px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: linear-gradient(180deg, #03122a 0%, #071127 100%); color: var(--text); line-height:1.5; }
     a { color: var(--accent); text-decoration: none; }
-    header, footer { text-align: center; margin-bottom: 20px; }
-    .wrap { max-width: var(--max-width); margin: 0 auto; }
-    .card { background: var(--card); padding: 20px; border-radius: var(--radius); margin-bottom: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
-    h1 { font-size: 2em; margin-bottom: 10px; }
-    h2 { font-size: 1.5em; margin-bottom: 10px; }
-    p { margin-bottom: 10px; }
-    input, select, textarea { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: var(--radius); border: 1px solid var(--muted); background: transparent; color: var(--text); }
-    button { width: 100%; padding: 12px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border: none; border-radius: var(--radius); color: white; font-weight: bold; cursor: pointer; }
-    .success { display: none; background: var(--accent); padding: 10px; border-radius: var(--radius); text-align: center; font-weight: bold; margin-bottom: 10px; }
-    .links { margin-top: 10px; text-align: center; }
-    @media (max-width: 700px) { .wrap { padding: 10px; } }
+    .wrap { max-width: var(--max-width); margin: 0 auto; padding: 20px; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .mark { width:48px; height:48px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 12px; display: grid; place-items: center; font-weight: bold; }
+    nav { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+    a.btn { background: var(--accent); color: white; padding: 10px 14px; border-radius: 10px; font-weight: bold; text-decoration: none; }
+
+    .hero { display: grid; grid-template-columns: 1fr 420px; gap: 24px; align-items: start; }
+    @media(max-width:920px){ .hero { grid-template-columns: 1fr; } }
+
+    .card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); padding: 22px; border-radius: var(--radius); margin-bottom: 20px; }
+    h1 { font-size: 28px; margin-bottom: 12px; }
+    .lead { color: #dbeafe; margin-bottom: 18px; }
+
+    .form-col { position: sticky; top: 20px; }
+    input, select, textarea { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); background: transparent; color: var(--text); }
+    button.primary { width: 100%; padding: 12px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border: none; color: white; font-weight: bold; border-radius: 10px; cursor: pointer; }
+    .success { display: none; background: linear-gradient(90deg,var(--accent),var(--accent2)); padding: 10px; border-radius: 10px; color:white; font-weight: bold; text-align: center; margin-bottom: 10px; }
+
+    footer { text-align: center; color: var(--muted); margin-top: 28px; font-size: 14px; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <h1>Real Estate Appointment Engine</h1>
-      <p>AI-powered lead follow-up & appointment booking</p>
+      <div class="logo">
+        <div class="mark">RE</div>
+        <div>
+          <div>Appointment Engine</div>
+          <div style="font-size:13px; color: var(--muted)">AI lead → showing automation</div>
+        </div>
+      </div>
+
+      <nav>
+        <a class="btn" href="#book">Book Demo</a>
+        <a href="mailto:jacksonaddison68@gmail.com">Email</a>
+        <a href="tel:+15303050502">Call</a>
+      </nav>
     </header>
 
-    <div class="card">
-      <h2>Book a 2-Minute Demo</h2>
-      <p>See how our AI system instantly responds to leads, qualifies them, and books showings directly on your calendar.</p>
-
-      <div id="success" class="success">Thanks — we received your request. Check your email for scheduling options.</div>
-
-      <form id="leadForm">
-        <input type="text" name="name" placeholder="Full Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="phone" placeholder="Phone" required>
-        <input type="text" name="area" placeholder="Primary Market Area (City/ZIP)">
-        <select name="teamSize">
-          <option value="solo">Solo Agent</option>
-          <option value="small">Small Team (2–10)</option>
-          <option value="large">Large Team / Brokerage</option>
-        </select>
-        <textarea name="msg" rows="3" placeholder="Quick Note (Optional)"></textarea>
-        <button type="submit">Request Demo</button>
-      </form>
-
-      <div class="links">
-        <p>Email: <a href="mailto:jacksonaddison68@gmail.com">jacksonaddison68@gmail.com</a></p>
-        <p>Call: <a href="tel:+15303050502">(530) 305-0502</a></p>
-        <p><a href="https://calendly.com/jacksonaddison68/new-meeting" target="_blank">Schedule Directly on Calendly</a></p>
+    <section class="hero">
+      <div>
+        <div class="card">
+          <h1>Instant texts. 30-day AI follow-up. Booked showings in minutes.</h1>
+          <p class="lead">Connect Zillow, Facebook & website leads to an AI workflow that qualifies buyers, books showings on your calendar, and keeps following up until they convert.</p>
+          <div class="card" style="margin-top:14px;">
+            <strong>Sample Result:</strong>
+            <p style="margin-top:8px; color: var(--muted)">“Agent converted 3 of 7 booked showings in 14 days — ~$18k commission — contact rate x4.”</p>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <aside class="form-col">
+        <div class="card" id="book">
+          <h2>Book a 2-min Demo</h2>
+          <div id="success" class="success">Thanks — we received your request. Check your email for scheduling options.</div>
+          <form id="leadForm">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="phone" placeholder="Phone" required>
+            <input type="text" name="area" placeholder="Primary Market Area">
+            <select name="teamSize">
+              <option value="solo">Solo Agent</option>
+              <option value="small">Small Team</option>
+              <option value="large">Large Team / Brokerage</option>
+            </select>
+            <textarea name="msg" rows="3" placeholder="Quick note (optional)"></textarea>
+            <button type="submit" class="primary">Request Demo</button>
+          </form>
+          <p style="margin-top:10px;">Or email: <a href="mailto:jacksonaddison68@gmail.com">jacksonaddison68@gmail.com</a></p>
+          <p>Call Sales: <a href="tel:+15303050502">(530) 305-0502</a></p>
+          <p><a href="https://calendly.com/jacksonaddison68/new-meeting" target="_blank">Schedule directly on Calendly</a></p>
+        </div>
+      </aside>
+    </section>
 
     <footer>
       © <span id="year"></span> Appointment Engine — Built for agents who want more showings.
@@ -84,7 +112,7 @@
   </div>
 
   <script>
-    // Auto-update year
+    // Update year
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // Form handling
@@ -98,9 +126,7 @@
           headers: {'Content-Type':'application/json'},
           body: JSON.stringify(payload)
         });
-      } catch(err) {
-        console.error('Zapier POST error', err);
-      }
+      } catch(err) { console.error('Zapier POST error', err); }
     }
 
     form.addEventListener('submit', async (e) => {
