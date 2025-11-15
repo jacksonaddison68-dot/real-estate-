@@ -1,148 +1,185 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Real Estate Appointment Engine — Book More Showings</title>
-  <meta name="description" content="Turn Zillow, Facebook & website leads into booked showings automatically. Instant AI response, 30-day follow-up, calendar booking. Book a 2-minute demo.">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Real Estate Appointment Engine — Book More Showings</title>
+<meta name="description" content="Turn Zillow, Facebook & website leads into booked showings automatically. Instant AI response, 30-day follow-up, calendar booking. Book a 2-minute demo." />
+<meta name="theme-color" content="#0b6bff" />
 
-  <!-- CONFIG -->
-  <script>
-    const CONFIG = {
-      ZAPIER_WEBHOOK: "https://hooks.zapier.com/hooks/catch/25377832/u8qvmi4/",
-      SALES_EMAIL: "jacksonaddison68@gmail.com",
-      CALENDLY_URL: "https://calendly.com/jacksonaddison68/new-meeting",
-    };
-  </script>
+<script>
+  const CONFIG = {
+    ZAPIER_WEBHOOK: "https://hooks.zapier.com/hooks/catch/25377832/u8qvmi4/",
+    SALES_EMAIL: "jacksonaddison68@gmail.com",
+    PHONE_NUMBER: "+15303050502",
+    CALENDLY_URL: "https://calendly.com/jacksonaddison68/new-meeting"
+  };
+</script>
 
-  <style>
-    :root {
-      --bg: #071127;
-      --card: #07142a;
-      --accent: #0b6bff;
-      --accent2: #7c3aed;
-      --text: #eef6ff;
-      --muted: #9fb0d1;
-      --radius: 14px;
-      --max-width: 1100px;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, sans-serif; background: linear-gradient(180deg, #03122a 0%, #071127 100%); color: var(--text); line-height:1.5; }
-    a { color: var(--accent); text-decoration: none; }
-    .wrap { max-width: var(--max-width); margin: 0 auto; padding: 20px; }
-    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
-    .logo { display: flex; align-items: center; gap: 10px; }
-    .mark { width:48px; height:48px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 12px; display: grid; place-items: center; font-weight: bold; }
-    nav { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
-    a.btn { background: var(--accent); color: white; padding: 10px 14px; border-radius: 10px; font-weight: bold; text-decoration: none; }
-
-    .hero { display: grid; grid-template-columns: 1fr 420px; gap: 24px; align-items: start; }
-    @media(max-width:920px){ .hero { grid-template-columns: 1fr; } }
-
-    .card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); padding: 22px; border-radius: var(--radius); margin-bottom: 20px; }
-    h1 { font-size: 28px; margin-bottom: 12px; }
-    .lead { color: #dbeafe; margin-bottom: 18px; }
-
-    .form-col { position: sticky; top: 20px; }
-    input, select, textarea { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); background: transparent; color: var(--text); }
-    button.primary { width: 100%; padding: 12px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border: none; color: white; font-weight: bold; border-radius: 10px; cursor: pointer; }
-    .success { display: none; background: linear-gradient(90deg,var(--accent),var(--accent2)); padding: 10px; border-radius: 10px; color:white; font-weight: bold; text-align: center; margin-bottom: 10px; }
-
-    footer { text-align: center; color: var(--muted); margin-top: 28px; font-size: 14px; }
-  </style>
+<style>
+  :root{--bg:#071127;--card:#07142a;--accent:#0b6bff;--accent2:#7c3aed;--muted:#9fb0d1;--white:#eef6ff;--radius:14px;--max:1100px;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#03122a 0%,#071127 100%);color:var(--white);padding:28px;}
+  .wrap{max-width:var(--max);margin:0 auto;}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;}
+  .logo{display:flex;gap:12px;align-items:center;}
+  .mark{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));font-weight:800;}
+  .brand{font-weight:700;}
+  nav{display:flex;gap:10px;align-items:center;}
+  a.btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;}
+  a.link{color:var(--muted);text-decoration:none;}
+  .hero{display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:start;}
+  @media(max-width:920px){.hero{grid-template-columns:1fr}header{flex-direction:column;align-items:flex-start}nav{margin-top:8px}}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));padding:22px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(2,6,23,0.6);}
+  .eyebrow{color:var(--muted);font-size:13px;margin-bottom:8px;}
+  h1{margin:0 0 10px;font-size:30px;line-height:1.02;}
+  p.lead{color:#dbeafe;margin:0 0 18px;}
+  .kpis{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
+  .kpi{background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:999px;font-weight:700;color:#e7f0ff;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;}
+  @media(max-width:720px){.grid-3{grid-template-columns:1fr}}
+  .feature{padding:12px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);}
+  .packages{display:flex;gap:12px;margin-top:16px;}
+  @media(max-width:720px){.packages{flex-direction:column}}
+  .pkg{flex:1;padding:16px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);}
+  .price{font-size:20px;font-weight:800;margin-top:8px;}
+  .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);}
+  .form-col{position:sticky;top:28px;}
+  .form-field{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+  input, select, textarea{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--white);outline:none;font-size:15px;}
+  button.primary{width:100%;padding:12px;background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:white;font-weight:800;border-radius:10px;cursor:pointer;}
+  .muted{color:var(--muted);font-size:13px;}
+  .success{display:none;background:linear-gradient(90deg,var(--accent),var(--accent2));padding:10px;border-radius:10px;color:white;font-weight:700;text-align:center;margin-bottom:8px;}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="logo">
-        <div class="mark">RE</div>
-        <div>
-          <div>Appointment Engine</div>
-          <div style="font-size:13px; color: var(--muted)">AI lead → showing automation</div>
+<div class="wrap">
+<header>
+  <div class="logo">
+    <div class="mark">RE</div>
+    <div>
+      <div class="brand">Appointment Engine</div>
+      <div style="font-size:13px;color:var(--muted)">AI lead → showing automation</div>
+    </div>
+  </div>
+  <nav>
+    <a class="link" href="#features">How it works</a>
+    <a class="link" href="#packages">Pricing</a>
+    <a class="btn" href="#book">Book Demo</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="card">
+      <div class="eyebrow">Turn existing leads into booked showings — without extra ad spend</div>
+      <h1>Instant texts. 30-day AI follow-up. Booked showings in minutes.</h1>
+      <p class="lead">Connect Zillow, Facebook & website leads to an AI workflow that qualifies buyers, books showings on your calendar, and keeps following up until they convert.</p>
+
+      <div class="kpis">
+        <div class="kpi">10–25 extra showings/mo</div>
+        <div class="kpi">1-hour onboarding</div>
+        <div class="kpi">No long contract</div>
+      </div>
+
+      <div id="features" style="margin-top:18px">
+        <div class="grid-3">
+          <div class="feature"><strong>Instant Response</strong><div class="muted">Reply under 1 second to increase contact rate.</div></div>
+          <div class="feature"><strong>AI Qualification</strong><div class="muted">Ask budget, timeline, pre-approval & filter junk.</div></div>
+          <div class="feature"><strong>Calendar Booking</strong><div class="muted">Showings booked directly on Google/Outlook calendar.</div></div>
         </div>
       </div>
 
-      <nav>
-        <a class="btn" href="#book">Book Demo</a>
-        <a href="mailto:jacksonaddison68@gmail.com">Email</a>
-        <a href="tel:+15303050502">Call</a>
-      </nav>
-    </header>
-
-    <section class="hero">
-      <div>
-        <div class="card">
-          <h1>Instant texts. 30-day AI follow-up. Booked showings in minutes.</h1>
-          <p class="lead">Connect Zillow, Facebook & website leads to an AI workflow that qualifies buyers, books showings on your calendar, and keeps following up until they convert.</p>
-          <div class="card" style="margin-top:14px;">
-            <strong>Sample Result:</strong>
-            <p style="margin-top:8px; color: var(--muted)">“Agent converted 3 of 7 booked showings in 14 days — ~$18k commission — contact rate x4.”</p>
-          </div>
+      <div class="packages" id="packages">
+        <div class="pkg">
+          <h3>Starter</h3>
+          <div class="price">$2,500 / mo</div>
+          <div class="muted">Follow-up, booking, CRM integration</div>
+        </div>
+        <div class="pkg">
+          <h3>Pro <span class="pill">Most popular</span></h3>
+          <div class="price">$5,000 / mo</div>
+          <div class="muted">Starter + lead scraping, auto-routing, lead scoring</div>
+        </div>
+        <div class="pkg">
+          <h3>Elite</h3>
+          <div class="price">$8,000 / mo</div>
+          <div class="muted">Pro + content automation, dashboards, priority support</div>
         </div>
       </div>
-
-      <aside class="form-col">
-        <div class="card" id="book">
-          <h2>Book a 2-min Demo</h2>
-          <div id="success" class="success">Thanks — we received your request. Check your email for scheduling options.</div>
-          <form id="leadForm">
-            <input type="text" name="name" placeholder="Full Name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="text" name="phone" placeholder="Phone" required>
-            <input type="text" name="area" placeholder="Primary Market Area">
-            <select name="teamSize">
-              <option value="solo">Solo Agent</option>
-              <option value="small">Small Team</option>
-              <option value="large">Large Team / Brokerage</option>
-            </select>
-            <textarea name="msg" rows="3" placeholder="Quick note (optional)"></textarea>
-            <button type="submit" class="primary">Request Demo</button>
-          </form>
-          <p style="margin-top:10px;">Or email: <a href="mailto:jacksonaddison68@gmail.com">jacksonaddison68@gmail.com</a></p>
-          <p>Call Sales: <a href="tel:+15303050502">(530) 305-0502</a></p>
-          <p><a href="https://calendly.com/jacksonaddison68/new-meeting" target="_blank">Schedule directly on Calendly</a></p>
-        </div>
-      </aside>
-    </section>
-
-    <footer>
-      © <span id="year"></span> Appointment Engine — Built for agents who want more showings.
-    </footer>
+    </div>
   </div>
 
-  <script>
-    // Update year
-    document.getElementById('year').textContent = new Date().getFullYear();
+  <aside class="form-col">
+    <div class="card" id="book">
+      <h3>Book a 2-min demo</h3>
+      <p class="muted">See the system handle a live lead and book a showing.</p>
 
-    // Form handling
-    const form = document.getElementById('leadForm');
-    const success = document.getElementById('success');
+      <div id="success" class="success">Thanks — we received your request. Check your email for scheduling options.</div>
 
-    async function postToZapier(payload) {
-      try {
-        await fetch(CONFIG.ZAPIER_WEBHOOK, {
-          method: 'POST',
-          headers: {'Content-Type':'application/json'},
-          body: JSON.stringify(payload)
-        });
-      } catch(err) { console.error('Zapier POST error', err); }
-    }
+      <form id="leadForm">
+        <div class="form-field"><label for="name">Full Name</label><input id="name" name="name" type="text" placeholder="Jane Smith" required></div>
+        <div class="form-field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@agency.com" required></div>
+        <div class="form-field"><label for="phone">Phone</label><input id="phone" name="phone" type="text" placeholder="+1 (555) 555-5555" required></div>
+        <div class="form-field"><label for="area">Primary Market Area</label><input id="area" name="area" type="text" placeholder="City, ZIP"></div>
+        <div class="form-field"><label for="teamSize">Team Size</label><select id="teamSize" name="teamSize"><option value="solo">Solo agent</option><option value="small">Small Team (2–10)</option><option value="large">Brokerage / Large Team</option></select></div>
+        <div class="form-field"><label for="msg">Quick Note (optional)</label><textarea id="msg" name="msg" rows="3" placeholder="Best times, main pain point..."></textarea></div>
+        <button type="submit" class="primary">Request Demo — 2 minutes</button>
+      </form>
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-      const payload = Object.fromEntries(data.entries());
+      <div style="margin-top:12px;text-align:center">
+        <p>Email: <a id="mailto" href="#">jacksonaddison68@gmail.com</a></p>
+        <p>Call: <a id="callLink" href="#">+1 (530) 305-0502</a></p>
+        <p><a id="calendlyBtn" href="#" target="_blank">Schedule directly</a></p>
+      </div>
+    </div>
+  </aside>
+</section>
 
-      success.style.display = 'block';
-      form.reset();
+<footer style="margin-top:28px;color:var(--muted);font-size:13px;text-align:center;">
+  © <span id="year"></span> Appointment Engine — Built for agents who want more showings.
+</footer>
+</div>
 
-      await postToZapier(payload);
+<script>
+  // Fill contact info
+  document.getElementById('mailto').href = 'mailto:' + CONFIG.SALES_EMAIL;
+  document.getElementById('callLink').href = 'tel:' + CONFIG.PHONE_NUMBER;
+  document.getElementById('calendlyBtn').href = CONFIG.CALENDLY_URL;
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-      if(CONFIG.CALENDLY_URL) {
-        window.open(CONFIG.CALENDLY_URL + (payload.email ? '?email=' + encodeURIComponent(payload.email) : ''), '_blank');
-      }
-    });
-  </script>
+  // Form submission
+  const form = document.getElementById('leadForm');
+  const success = document.getElementById('success');
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const data = new FormData(form);
+    const payload = {
+      name: data.get('name'),
+      email: data.get('email'),
+      phone: data.get('phone'),
+      area: data.get('area'),
+      teamSize: data.get('teamSize'),
+      msg: data.get('msg'),
+      ts: new Date().toISOString(),
+      page: window.location.href,
+      utm_source: (new URLSearchParams(window.location.search)).get('utm_source') || ''
+    };
+
+    try {
+      await fetch(CONFIG.ZAPIER_WEBHOOK, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
+      });
+    } catch(err){console.error('Zapier POST error', err);}
+
+    success.style.display='block';
+    form.reset();
+
+    if(CONFIG.CALENDLY_URL){window.open(CONFIG.CALENDLY_URL+'?email='+encodeURIComponent(payload.email),'_blank');}
+  });
+</script>
 </body>
 </html>
