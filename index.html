@@ -80,47 +80,46 @@
   </div>
 
   <script>
-    const WEBHOOK = "https://hook.us2.make.com/v4fkxkdmnd4mu19novb412zmic59lvf9";
-    const CALENDLY = "https://calendly.com/jacksonaddison68/new-meeting";
+  const WEBHOOK = "https://hook.us2.make.com/v4fkxkdmnd4mu19novb412zmic59lvf9";
+  const CALENDLY = "https://calendly.com/jacksonaddison68/new-meeting";
 
-    const form = document.getElementById("leadForm");
-    const success = document.getElementById("success");
+  const form = document.getElementById("leadForm");
+  const success = document.getElementById("success");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      const data = new FormData(form);
-      
-      const payload = {
-        name: data.get("name"),
-        email: data.get("email"),
-        phone: data.get("phone"),
-        area: data.get("area"),
-        team_size: data.get("team_size"),
-        notes: data.get("notes"),
-        submitted_at: new Date().toISOString(),
-        page: window.location.href
-      };
+    // Open Calendly instantly (always works)
+    window.open(CALENDLY, "_blank");
 
-      try {
-        await fetch(WEBHOOK, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
+    const data = new FormData(form);
 
-        success.style.display = "block";
-        form.reset();
+    const payload = {
+      name: data.get("name"),
+      email: data.get("email"),
+      phone: data.get("phone"),
+      area: data.get("area"),
+      team_size: data.get("team_size"),
+      notes: data.get("notes"),
+      submitted_at: new Date().toISOString(),
+      page: window.location.href
+    };
 
-        // Auto-open Calendly
-        window.open(CALENDLY, "_blank");
+    try {
+      await fetch(WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
 
-      } catch (err) {
-        alert("Error sending data.");
-        console.error(err);
-      }
-    });
-  </script>
+      success.style.display = "block";
+      form.reset();
 
+    } catch (err) {
+      alert("Error sending data.");
+      console.error(err);
+    }
+  });
+</script>  
 </body>
 </html>
