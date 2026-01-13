@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales Automation Engine</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #cbd5f5;
+    }
+    .card {
+      background: #020617;
+      padding: 25px;
+      border-radius: 12px;
+      margin-top: 30px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .success {
+      display: none;
+      background: #16a34a;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Automate Your Sales Pipeline</h1>
+    <p>
+      Capture leads, notify your team, and auto-book appointments — all without
+      manual work.
+    </p>
+
+    <div class="card">
+      <h2>Book a Free Demo</h2>
+      <p>See how this system works in under 2 minutes.</p>
+
+      <div class="success" id="success">
+        ✅ Submitted! Redirecting you to scheduling...
+      </div>
+
+      <form id="leadForm">
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="text" name="phone" placeholder="Phone Number" required />
+        <input type="text" name="company" placeholder="Company Name" />
+        <select name="team_size">
+          <option value="Solo">Solo</option>
+          <option value="2-5">2–5 people</option>
+          <option value="6-20">6–20 people</option>
+          <option value="20+">20+ people</option>
+        </select>
+        <textarea name="notes" placeholder="What are you looking to automate?"></textarea>
+
+        <button type="submit">Request Demo</button>
+      </form>
+
+      <p style="margin-top:15px;">
+        📧 Email: <strong>jacksonaddison68@gmail.com</strong><br/>
+        📞 Phone: <strong>(530) 305-0502</strong>
+      </p>
+    </div>
+
+    <footer>
+      © <span id="year"></span> Sales Automation Engine
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").innerText = new Date().getFullYear();
+
+    const MAKE_WEBHOOK =
+      "https://hook.us2.make.com/v4fkxkdmnd4mu19novb412zmic59lvf9";
+
+    const CALENDLY_URL =
+      "https://calendly.com/jacksonaddison68/new-meeting";
+
+    const form = document.getElementById("leadForm");
+    const success = document.getElementById("success");
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      try try {
+        await fetch(MAKE_WEBHOOK, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        success.style.display = "block";
+        form.reset();
+
+        setTimeout(() => {
+          window.open(CALENDLY_URL, "_blank");
+        }, 1200);
+
+      } catch (err) {
+        alert("Submission failed. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>
